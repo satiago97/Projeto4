@@ -18,7 +18,7 @@ class LoginService {
             return Promise.resolve(response);
         })
             .catch(error => {
-                return Promise.resolve(error);
+                return Promise.resolve(403);
             });
     }
 }

@@ -32,6 +32,7 @@ export default function Login({ navigation }) {
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [isLoading, setLoading] = useState(false);
+  const [showText, setShowText] = useState(false);
 
   const entrar = () => {
     let data = {
@@ -42,12 +43,16 @@ export default function Login({ navigation }) {
 
     loginService.login(data).then(response => {
       setLoading(false);
+      if(response != 403){
       if (response.data.errors == false) {
         navigation.reset({
           index: 0,
           routes: [{ name: "Home" }],
         });
       }
+    }else{
+      setShowText(!showText);
+    }
     });
   };
 
@@ -94,6 +99,7 @@ export default function Login({ navigation }) {
             <Text style={styles.submitText}>Entrar</Text>
           </Button>
         }
+        {showText && <Text>Dados Invalidos</Text>}
       </Animated.View>
     </KeyboardAvoidingView>
   );
