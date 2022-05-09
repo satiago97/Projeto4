@@ -7,6 +7,7 @@ import { NativeBaseProvider } from 'native-base';
 import Login from './screens/Login';
 import Menu from './screens/Menu';
 import About from './screens/About';
+import { StatusBar } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -17,7 +18,7 @@ function Home() {
       initialRouteName="Menu"
       screenOptions={{
         drawerStyle: {
-          backgroundColor: '#AFAAA5',
+          backgroundColor: '#FFFFFF',
           width: 250,
         }
       }}>
@@ -26,16 +27,16 @@ function Home() {
         component={Menu}
         options={{ headerShown: false }}
       />
-      <Drawer.Screen name="Orçamentos" component={About} />
-      <Drawer.Screen name="Doc. de Transporte" component={About} />
-      <Drawer.Screen name="Vendas" component={About} />
-      <Drawer.Screen name="Compras" component={About} />
-      <Drawer.Screen name="Análise" component={About} />
-      <Drawer.Screen name="SAF-T" component={About} />
-      <Drawer.Screen name="Tabelas" component={About} />
-      <Drawer.Screen name="Mapas" component={About} />
-      <Drawer.Screen name="EncomendaAqui" component={About} />
-      <Drawer.Screen name="POS" component={About} />
+      <Drawer.Screen name="Orçamentos" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="Doc. de Transporte" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="Vendas" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="Compras" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="Análise" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="SAF-T" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="Tabelas" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="Mapas" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="EncomendaAqui" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="POS" component={About} options={{ headerShown: false }}/>
     </Drawer.Navigator>
   );
 }
@@ -43,6 +44,10 @@ function Home() {
 export default function App() {
   return (
     <NativeBaseProvider>
+      <StatusBar
+        backgroundColor="#AF7633"
+        barStyle="light-content"
+     />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen

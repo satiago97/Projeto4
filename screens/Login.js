@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#AFAAA5',
+    backgroundColor: '#FFFFFF',
   },
   containerLogo: {
     flex: 1,
@@ -131,6 +131,16 @@ const styles = StyleSheet.create({
     fontSize: 17,
     borderRadius: 7,
     padding: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 12,
+    },
+    shadowOpacity: 0.58,
+    shadowRadius: 16.00,
+    elevation: 24,
+
+elevation: 5,
   },
   btnSubmit: {
     backgroundColor: '#9C5D26',
