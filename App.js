@@ -6,8 +6,13 @@ import 'react-native-gesture-handler';
 import { NativeBaseProvider } from 'native-base';
 import Login from './screens/Login';
 import Menu from './screens/Menu';
-import About from './screens/About';
+import Tabelas from './screens/Tabelas';
 import { StatusBar } from 'react-native';
+import Orcamentos from './screens/Orcamentos';
+import DocTransporte from './screens/DocTransporte';
+import Vendas from './screens/Vendas';
+import Compras from './screens/Compras';
+import Analise from './screens/Analise';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -27,16 +32,16 @@ function Home() {
         component={Menu}
         options={{ headerShown: false }}
       />
-      <Drawer.Screen name="Orçamentos" component={About} options={{ headerShown: false }}/>
-      <Drawer.Screen name="Doc. de Transporte" component={About} options={{ headerShown: false }}/>
-      <Drawer.Screen name="Vendas" component={About} options={{ headerShown: false }}/>
-      <Drawer.Screen name="Compras" component={About} options={{ headerShown: false }}/>
-      <Drawer.Screen name="Análise" component={About} options={{ headerShown: false }}/>
-      <Drawer.Screen name="SAF-T" component={About} options={{ headerShown: false }}/>
-      <Drawer.Screen name="Tabelas" component={About} options={{ headerShown: false }}/>
-      <Drawer.Screen name="Mapas" component={About} options={{ headerShown: false }}/>
-      <Drawer.Screen name="EncomendaAqui" component={About} options={{ headerShown: false }}/>
-      <Drawer.Screen name="POS" component={About} options={{ headerShown: false }}/>
+      <Drawer.Screen name="Orçamentos" component={Orcamentos} options={{ headerShown: false }} />
+      <Drawer.Screen name="Doc. de Transporte" component={DocTransporte} options={{ headerShown: false }} />
+      <Drawer.Screen name="Vendas" component={Vendas} options={{ headerShown: false }} />
+      <Drawer.Screen name="Compras" component={Compras} options={{ headerShown: false }} />
+      <Drawer.Screen name="Análise" component={Analise} options={{ headerShown: false }} />
+      <Drawer.Screen name="SAF-T" component={Tabelas} options={{ headerShown: false }} />
+      <Drawer.Screen name="Tabelas" component={Tabelas} options={{ headerShown: false }} />
+      <Drawer.Screen name="Mapas" component={Tabelas} options={{ headerShown: false }} />
+      <Drawer.Screen name="EncomendaAqui" component={Tabelas} options={{ headerShown: false }} />
+      <Drawer.Screen name="POS" component={Tabelas} options={{ headerShown: false }} />
     </Drawer.Navigator>
   );
 }
@@ -47,7 +52,7 @@ export default function App() {
       <StatusBar
         backgroundColor="#AF7633"
         barStyle="light-content"
-     />
+      />
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen
@@ -56,6 +61,7 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            title="20"
             name="Home"
             component={Home}
             options={{ headerShown: false }}
