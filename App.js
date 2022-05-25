@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,6 +14,7 @@ import DocTransporte from './screens/DocTransporte';
 import Vendas from './screens/Vendas';
 import Compras from './screens/Compras';
 import Analise from './screens/Analise';
+import Clientes from './screens/Clientes';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -64,6 +66,12 @@ export default function App() {
             title="20"
             name="Home"
             component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="Clients"
+            name="Clientes"
+            component={Clientes}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

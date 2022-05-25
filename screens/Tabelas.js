@@ -1,4 +1,6 @@
+/* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
   StyleSheet,
   Text,
@@ -16,15 +18,15 @@ export default class Tabelas extends Component {
     super(props);
     this.state = {
       data: [
-        { id: 1, title: "Categorias de Artigos", image: "https://img.icons8.com/color/96/000000/category.png" },
-        { id: 1, title: "Artigos", image: "https://img.icons8.com/doodle/96/000000/used-product.png" },
-        { id: 2, title: "Abate de Artigos", image: "https://img.icons8.com/color/96/000000/used-product.png" },
-        { id: 3, title: "Stocks Mínimos", image: "https://img.icons8.com/color/96/000000/sell-stock.png" },
-        { id: 4, title: "Clientes", image: "https://img.icons8.com/color-glass/96/000000/check-in-desk.png" },
-        { id: 5, title: "Fornecedores", image: "https://img.icons8.com/color/96/000000/supplier.png" },
-        { id: 6, title: "Movimentos Caixa", image: "https://img.icons8.com/color/96/000000/atm.png" },
-        { id: 8, title: "Centros de Custo", image: "https://img.icons8.com/color/96/000000/expensive.png" },
-        { id: 9, title: "Referências de Pagamento", image: "https://img.icons8.com/color/96/000000/invoice.png" },
+        { id: 1, title: 'Categorias de Artigos', image: 'https://img.icons8.com/color/96/000000/category.png', route: '' },
+        { id: 2, title: 'Artigos', image: 'https://img.icons8.com/doodle/96/000000/used-product.png', route: '' },
+        { id: 3, title: 'Abate de Artigos', image: 'https://img.icons8.com/color/96/000000/used-product.png', route: '' },
+        { id: 4, title: 'Stocks Mínimos', image: 'https://img.icons8.com/color/96/000000/sell-stock.png', route: '' },
+        { id: 5, title: 'Clientes', image: 'https://img.icons8.com/color-glass/96/000000/check-in-desk.png', route: 'Clientes' },
+        { id: 6, title: 'Fornecedores', image: 'https://img.icons8.com/color/96/000000/supplier.png', route: '' },
+        { id: 7, title: 'Movimentos Caixa', image: 'https://img.icons8.com/color/96/000000/atm.png', route: '' },
+        { id: 8, title: 'Centros de Custo', image: 'https://img.icons8.com/color/96/000000/expensive.png', route: '' },
+        { id: 9, title: 'Referências de Pagamento', image: 'https://img.icons8.com/color/96/000000/invoice.png', route: '' },
       ]
     };
   }
@@ -42,17 +44,17 @@ export default class Tabelas extends Component {
           horizontal={false}
           numColumns={2}
           keyExtractor={(item) => {
-            return item.id;
+            return item.route;
           }}
           renderItem={({ item }) => {
             return (
               <View>
-                <TouchableOpacity style={styles.card} onPress={() => { this.clickEventListener(item) }}>
+                <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate(item.route)}>
                   <Image style={styles.cardImage} source={{ uri: item.image }} />
                 </TouchableOpacity>
 
                 <View style={styles.cardHeader}>
-                  <View style={{ alignItems: "center", justifyContent: "center" }}>
+                  <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <Text style={styles.title}>{item.title}</Text>
                   </View>
                 </View>
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
   },
   list: {
     paddingHorizontal: 5,
-    backgroundColor: "#f6f6f6",
+    backgroundColor: '#f6f6f6',
   },
   listContainer: {
     alignItems: 'center'
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
     elevation: 12,
     marginVertical: 20,
     marginHorizontal: 40,
-    backgroundColor: "#e2e2e2",
+    backgroundColor: '#e2e2e2',
     //flexBasis: '42%',
     width: 120,
     height: 120,
@@ -104,8 +106,8 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 1,
     borderTopRightRadius: 1,
     flexDirection: 'row',
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   cardContent: {
     paddingVertical: 12.5,
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     flex: 1,
     alignSelf: 'center',
-    color: "#696969",
+    color: '#696969',
     marginTop: -20,
   },
 });    

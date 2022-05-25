@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { useState, useEffect } from 'react';
 import loginService from '../services/loginService';
 import { ActivityIndicator } from 'react-native';
@@ -43,16 +44,16 @@ export default function Login({ navigation }) {
 
     loginService.login(data).then(response => {
       setLoading(false);
-      if(response != 403){
-      if (response.data.errors == false) {
-        navigation.reset({
-          index: 0,
-          routes: [{ name: "Home" }],
-        });
+      if (response != 403) {
+        if (response.data.errors == false) {
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'Home' }],
+          });
+        }
+      } else {
+        setShowText(!showText);
       }
-    }else{
-      setShowText(!showText);
-    }
     });
   };
 
@@ -139,8 +140,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.58,
     shadowRadius: 16.00,
     elevation: 24,
-
-elevation: 5,
   },
   btnSubmit: {
     backgroundColor: '#9C5D26',
