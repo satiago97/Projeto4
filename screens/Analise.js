@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
 import {
     StyleSheet,
@@ -17,8 +18,8 @@ export default class Analise extends Component {
         this.state = {
             data: [
                 { id: 1, title: "Conta Corrente", image: "https://img.icons8.com/color/96/000000/stack-of-money.png" },
-                { id: 1, title: "Centros de Custo", image: "https://img.icons8.com/color/96/000000/expensive.png" },
-                { id: 2, title: "Contabilidade", image: "https://img.icons8.com/color/96/000000/fund-accounting.png" },
+                { id: 2, title: "Centros de Custo", image: "https://img.icons8.com/color/96/000000/expensive.png" },
+                { id: 3, title: "Contabilidade", image: "https://img.icons8.com/color/96/000000/fund-accounting.png" },
             ]
         };
     }

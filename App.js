@@ -15,6 +15,7 @@ import Vendas from './screens/Vendas';
 import Compras from './screens/Compras';
 import Analise from './screens/Analise';
 import Clientes from './screens/Clientes';
+import Artigos from './screens/Artigos';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -72,6 +73,12 @@ export default function App() {
             title="Clients"
             name="Clientes"
             component={Clientes}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="Articles"
+            name="Artigos"
+            component={Artigos}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

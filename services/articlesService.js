@@ -2,20 +2,20 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-class ClientsService {
 
+class ArticlesService {
     getToken = async () => AsyncStorage.getItem('TOKEN')
-    async getclientes() {
+    async getArtigos() {
         var token = await this.getToken();
+
         return axios({
-            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/clientes',
+            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/artigos',
             method: 'GET',
             timeout: 5000,
             params: {
                 opcao: '0',
                 pag: '0',
                 numRows: '25',
-                table_usage: '1',
                 _token: token
             },
             headers: {
@@ -25,7 +25,5 @@ class ClientsService {
     }
 }
 
-const clientsService = new ClientsService();
-export default clientsService;
-
-
+const articlesService = new ArticlesService();
+export default articlesService;

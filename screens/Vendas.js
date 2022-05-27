@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import React, { Component } from 'react';
 import {
     StyleSheet,
@@ -16,15 +17,15 @@ export default class Vendas extends Component {
         super(props);
         this.state = {
             data: [
-                { id: 1, title: "Faturas", image: "https://img.icons8.com/color/96/000000/invoice.png" },
-                { id: 1, title: "Faturas Simplificadas", image: "https://img.icons8.com/color/96/000000/check--v1.png" },
-                { id: 2, title: "Faturas-Recibo", image: "https://img.icons8.com/color/96/000000/receipt.png" },
-                { id: 3, title: "Notas de Crédito", image: "https://img.icons8.com/color/96/000000/insert-card.png" },
-                { id: 4, title: "Notas de Débito", image: "https://img.icons8.com/color/96/000000/bill.png" },
-                { id: 5, title: "Recibos", image: "https://img.icons8.com/color/96/000000/get-a-receipt.png" },
-                { id: 6, title: "Avenças", image: "https://img.icons8.com/color/96/000000/paper.png" },
-                { id: 8, title: "Mov. Adicionais", image: "https://img.icons8.com/color/96/000000/move-stock.png" },
-            ]
+                { id: 1, title: 'Faturas', image: 'https://img.icons8.com/color/96/000000/invoice.png' },
+                { id: 2, title: 'Faturas Simplificadas', image: 'https://img.icons8.com/color/96/000000/check--v1.png' },
+                { id: 3, title: 'Faturas-Recibo', image: 'https://img.icons8.com/color/96/000000/receipt.png' },
+                { id: 4, title: 'Notas de Crédito', image: 'https://img.icons8.com/color/96/000000/insert-card.png' },
+                { id: 5, title: 'Notas de Débito', image: 'https://img.icons8.com/color/96/000000/bill.png' },
+                { id: 6, title: 'Recibos', image: 'https://img.icons8.com/color/96/000000/get-a-receipt.png' },
+                { id: 7, title: 'Avenças', image: 'https://img.icons8.com/color/96/000000/paper.png' },
+                { id: 8, title: 'Mov. Adicionais', image: 'https://img.icons8.com/color/96/000000/move-stock.png' },
+            ],
         };
     }
 
@@ -51,7 +52,7 @@ export default class Vendas extends Component {
                                 </TouchableOpacity>
 
                                 <View style={styles.cardHeader}>
-                                    <View style={{ alignItems: "center", justifyContent: "center" }}>
+                                    <View style={{ alignItems: 'center', justifyContent: 'center' }}>
                                         <Text style={styles.title}>{item.title}</Text>
                                     </View>
                                 </View>
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     },
     list: {
         paddingHorizontal: 5,
-        backgroundColor: "#f6f6f6",
+        backgroundColor: '#f6f6f6',
     },
     listContainer: {
         alignItems: 'center'
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
         elevation: 12,
         marginVertical: 20,
         marginHorizontal: 40,
-        backgroundColor: "#e2e2e2",
+        backgroundColor: '#e2e2e2',
         //flexBasis: '42%',
         width: 120,
         height: 120,
@@ -103,8 +104,8 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 1,
         borderTopRightRadius: 1,
         flexDirection: 'row',
-        alignItems: "center",
-        justifyContent: "center"
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     cardContent: {
         paddingVertical: 12.5,
@@ -128,7 +129,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         flex: 1,
         alignSelf: 'center',
-        color: "#696969",
+        color: '#696969',
         marginTop: -20,
     },
 });    

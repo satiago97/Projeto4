@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect, Component } from 'react';
-import clientsService from '../services/clientsService';
+import articlesService from '../services/articlesService';
 import { ActivityIndicator } from 'react-native';
 import { Stack, Center, Heading, VStack, Divider, NativeBaseProvider, Box, HStack, Avatar, Spacer, Image } from "native-base";
 
@@ -20,9 +20,9 @@ import {
 } from 'react-native';
 
 
-export default class Clientes extends Component {
+export default class Artigos extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             isLoading: true,
             dataSource: [],
@@ -32,26 +32,21 @@ export default class Clientes extends Component {
 
 
     componentDidMount() {
-        clientsService.getclientes().then(response => {
+        articlesService.getArtigos().then(response => {
             this.setState({
                 isLoading: false,
                 dataSource: response.data.aaData,
-            })
+            });
         });
     }
 
+
     render() {
-        let { container } = styles;
         let { dataSource, isLoading, array } = this.state;
-        console.log(dataSource)
         for (let i = 0; i < dataSource.length; i++) {
-            array[i] = { 'id': dataSource[i][0], 'nome': dataSource[i][2] };
-
-            console.log(array.id);
+            array[i] = { 'id': dataSource[i][0], 'nome': dataSource[i][1] };
         }
-        console.log(array)
         return (
-
             <Box>
                 <Heading fontSize="xl" p="4" pb="3">
                     Clientes
@@ -63,7 +58,7 @@ export default class Clientes extends Component {
                 }} borderColor="coolGray.200" pl="4" pr="5" py="2">
                         <HStack space={3} justifyContent="space-between">
                             <Avatar size="48px" source={{
-                                uri: 'https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/000000/external-client-gig-economy-flaticons-lineal-color-flat-icons-4.png'
+                                uri: 'https://img.icons8.com/arcade/64/000000/experimental-box-arcade.png'
                             }} />
                             <VStack>
                                 <Text _dark={{
@@ -96,6 +91,7 @@ export default class Clientes extends Component {
                         </HStack>
                     </Box>} keyExtractor={item => item.id} />
             </Box>
+
         )
     }
 
@@ -105,11 +101,12 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     item: {
         padding: 5,
         borderBottomWidth: 1,
-        borderBottomColor: '#eee'
+        borderBottomColor: '#eee',
     },
+
 });
