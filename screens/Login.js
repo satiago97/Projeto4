@@ -80,6 +80,7 @@ export default function Login({ navigation }) {
         <TextInput
           style={styles.input}
           placeholder="Username"
+          placeholderTextColor="#000" 
           autoCorrect={false}
           value={username}
           onChangeText={value => setUsername(value)}
@@ -89,6 +90,7 @@ export default function Login({ navigation }) {
         <TextInput
           style={styles.input}
           placeholder="Password"
+          placeholderTextColor="#000" 
           autoCorrect={false}
           value={password}
           onChangeText={value => setPassword(value)}
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: '90%',
     marginBottom: 15,
-    color: '#222',
+    color: '#000',
     fontSize: 17,
     borderRadius: 7,
     padding: 10,

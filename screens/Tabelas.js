@@ -69,7 +69,6 @@ export default class Tabelas extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 40,
     backgroundColor: '#f6f6f6',
   },
   list: {
@@ -77,6 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f6f6f6',
   },
   listContainer: {
+    marginTop: 20,
     alignItems: 'center'
   },
   /******** card **************/
