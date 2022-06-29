@@ -15,7 +15,8 @@ import {
     KeyboardAvoidingView,
     LayoutAnimation,
     TouchableOpacity,
-    FlatList
+    FlatList,
+    DevSettings
 } from 'react-native';
 
 import Swiper from 'react-native-swiper';
@@ -30,28 +31,7 @@ export default class Clientes extends Component {
             array: [],
             showModal: false,
             showModalEdit: false,
-            dataCliente: {
-                idCliente: null,
-                Nome: null ,
-                Nif: null,
-                Pais: null,
-                Endereco: null,
-                Localidade: null,
-                CodigoPostal: null,
-                Regiao: null,
-                Cidade: null,
-                Email: null,
-                Website: null,
-                Telemovel: null,
-                Telefone: null,
-                Fax: null,
-                Pagamento: null,
-                Vencimento: null,
-                Desconto: null,
-                Flag: null,
-                CodigoInterno: null,
-                Codigo: null
-            }
+            dataCliente: []
         }
     }
 
@@ -62,30 +42,10 @@ export default class Clientes extends Component {
         clientsService.getcliente(id).then(response => {
             this.setState({
                 isLoading: false,
-                dataCliente: {
-                    idCliente: response.data.data.ID_Cliente,
-                    Nome: response.data.data.Nome ,
-                    Nif: response.data.data.Nif,
-                    Pais: response.data.data.Pais,
-                    Endereco: response.data.data.Endereco,
-                    Localidade: response.data.data.Localidade,
-                    CodigoPostal: response.data.data.CodigoPostal,
-                    Regiao: response.data.data.Regiao,
-                    Cidade: response.data.data.Cidade,
-                    Email: response.data.data.Email,
-                    Website: response.data.data.Website,
-                    Telemovel: response.data.data.Telemovel,
-                    Telefone: response.data.data.Telefone,
-                    Fax: response.data.data.Fax,
-                    Pagamento: response.data.data.Pagamento,
-                    Vencimento: response.data.data.Vencimento,
-                    Desconto: response.data.data.Desconto,
-                    Flag: response.data.data.Flag,
-                    CodigoInterno: response.data.data.CodigoInterno,
-                    Codigo: response.data.data.Codigo
-                },
+                dataCliente: response.data.data,
                 showModal: true
             })
+            console.log(this.state.dataCliente)
         });
     }
 
@@ -100,6 +60,19 @@ export default class Clientes extends Component {
             })
         });
     }
+
+
+    deleteCli = (idCliente) => {
+        console.log("deleteCli")
+        var id = idCliente;
+        clientsService.deletecliente(id);
+        clientsService.getclientes().then(response => {
+            this.setState({
+                dataSource: response.data.aaData
+            })
+        });
+    }
+
 
 
     submitEditCliente = () => {
@@ -168,7 +141,7 @@ export default class Clientes extends Component {
                                     uri: 'https://img.icons8.com/color/48/000000/edit--v1.png'
                                 }} />
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.deleteCli(item.idCliente)}>
                                 <Image size="20px" alt='deleteImage' source={{
                                     uri: 'https://img.icons8.com/plasticine/100/000000/filled-trash.png'
                                 }} />

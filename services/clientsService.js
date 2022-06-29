@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import qs from 'qs';
 
 class ClientsService {
 
@@ -43,15 +44,16 @@ class ClientsService {
 
 
     async editcliente(dadosCli) {
+        console.log(dadosCli.Cidade);
         var token = await this.getToken();
         return axios({
             url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/clientes',
             method: 'PUT',
             timeout: 5000,
-            params: {
+            data : qs.stringify({
                 opcao: '3',
                 _token: token,
-                idCliente: dadosCli.idCliente,
+                idCliente: dadosCli.ID_Cliente,
                 nome_cliente: dadosCli.Nome ,
                 nif_cliente: dadosCli.Nif,
                 pais_cliente: dadosCli.Pais,
@@ -73,10 +75,25 @@ class ClientsService {
                 desconto_cliente: dadosCli.Desconto,
                 flagContaGeral: dadosCli.Flag,
                 codigo_interno_cliente: dadosCli.CodigoInterno,
-            },
-            headers: {
-                Accept: 'application/json',
-            },
+        }),
+                headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        });
+    }
+
+
+
+    async deletecliente(id) {
+        var token = await this.getToken();
+        return axios({
+            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/clientes',
+            method: 'DELETE',
+            timeout: 5000,
+            data : qs.stringify({
+                opcao: '4',
+                _token: token,
+                idCliente: id
+                }),
+                headers: { 'content-type': 'application/x-www-form-urlencoded' },
         });
     }
 }
