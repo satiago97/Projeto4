@@ -45,45 +45,119 @@ function Menu() {
 
   return (
     <ScrollView>
-      <VStack space={1} mt="3" px="4">
-        <Heading size="md" margin={2} textAlign="center">2022</Heading>
-        <Center w="64" h="10" bg="#CCAC6E" rounded="lg" shadow={3}><Text>Total Faturado:</Text></Center>
-        <Center w="64" h="10" bg="#CB942C" rounded="lg" shadow={3}><Text>Total Faturas Liquidado:</Text></Center>
-        <Center w="64" h="10" bg="#CCAC6E" rounded="lg" shadow={3}><Text>Tot. Faturas P/Liquidar</Text></Center>
-        <Center w="64" h="10" bg="#CB942C" rounded="lg" shadow={3}><Text>Tot. IVA Faturas</Text></Center>
-        <Center w="64" h="10" bg="#CCAC6E" rounded="lg" shadow={3}><Text>Tot. Comprado</Text></Center>
-        <Center w="64" h="10" bg="#CB942C" rounded="lg" shadow={3}><Text>Tot. Compras Liquidado</Text></Center>
-        <Center w="64" h="10" bg="#CCAC6E" rounded="lg" shadow={3}><Text>Tot. Compras P/Liquidar</Text></Center>
-        <Center w="64" h="10" bg="#CB942C" rounded="lg" shadow={3}><Text>Nº Clientes</Text></Center>
-        <Center w="64" h="10" bg="#CCAC6E" rounded="lg" shadow={3}><Text>Nº Fornecedores</Text></Center>
-        <Center w="64" h="10" bg="#CB942C" rounded="lg" shadow={3}><Text>Nº Guias Registadas</Text></Center>
-        <Center w="64" h="10" bg="#CCAC6E" rounded="lg" shadow={3}><Text>Nº Faturas Registadas</Text></Center>
+      <VStack space="2.5" mt="3" px="4">
+        <Heading size="md" margin={2} textAlign="center" >2022</Heading>
+        <Stack direction="row" mb="2.5" mt="1.5" space={3}>
+          <Center size="20" bg="#C8742A" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Total Faturado
+            <Text fontSize="md" color="white">1500€</Text>
+          </Center>
+          <Center bg="#C6620A" size="20" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Total Fat. Liquidado
+            <Text fontSize="md" color="white">15000€</Text>
+          </Center>
+          <Center size="20" bg="#9C5D26" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Total Fat. P/ Liquidar
+            <Text fontSize="md" color="white">150000€</Text>
+          </Center>
+        </Stack>
       </VStack>
-      <View
-        style={{
-          marginTop: 20,
-          borderBottomColor: 'black',
-          borderBottomWidth: 1,
-        }}
-      />
+      <VStack space="2.5" mt="3" px="4">
+        <Stack direction="row" mb="2.5" mt="1.5" space={3}>
+          <Center size="20" bg="#C8742A" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Total IVA Faturas
+            <Text fontSize="md" color="white">1500€</Text>
+          </Center>
+          <Center bg="#C6620A" size="20" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Total Comprado
+            <Text fontSize="md" color="white">15000€</Text>
+          </Center>
+          <Center size="20" bg="#9C5D26" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Total Compras Liquidado
+            <Text fontSize="md" color="white">150000€</Text>
+          </Center>
+        </Stack>
+      </VStack>
+      <VStack space="2.5" mt="3" px="4">
+        <Stack direction="row" mb="2.5" mt="1.5" space={3}>
+          <Center size="20" bg="#C8742A" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Tot. Compras P/Liquidar
+            <Text fontSize="md" color="white">1500€</Text>
+          </Center>
+          <Center bg="#C6620A" size="20" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Nº Clientes
+            <Text fontSize="md" color="white">15000€</Text>
+          </Center>
+          <Center size="20" bg="#9C5D26" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Nº Fornecedores
+            <Text fontSize="md" color="white">150000€</Text>
+          </Center>
+        </Stack>
+      </VStack>
+      <VStack space="2.5" mt="3" px="4">
+        <Stack direction="row" mb="2.5" mt="1.5" space={3}>
+          <Center size="20" bg="#C8742A" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Nº Guias Registadas
+            <Text fontSize="md" color="white">1500€</Text>
+          </Center>
+          <Center bg="#C6620A" size="20" rounded="lg" _text={{
+            color: "warmGray.50",
+            fontWeight: "medium"
+          }} shadow={"3"}>
+            Nº Fat Registadas
+            <Text fontSize="md" color="white">15000€</Text>
+          </Center>
+        </Stack>
+      </VStack>
+
       <VStack space="2.5" mt="3" px="4">
         <Heading size="md" margin={2} textAlign="center" >Visão Global</Heading>
         <Stack direction="row" mb="2.5" mt="1.5" space={3}>
-          <Center size="20" bg="primary.400" rounded="lg" _text={{
+          <Center size="20" bg="#C8742A" rounded="lg" _text={{
             color: "warmGray.50",
             fontWeight: "medium"
           }} shadow={"3"}>
             Faturado Hoje
             <Text fontSize="md" color="white">1500€</Text>
           </Center>
-          <Center bg="primary.500" size="20" rounded="lg" _text={{
+          <Center bg="#C6620A" size="20" rounded="lg" _text={{
             color: "warmGray.50",
             fontWeight: "medium"
           }} shadow={"3"}>
             Faturado Mês
             <Text fontSize="md" color="white">15000€</Text>
           </Center>
-          <Center size="20" bg="primary.700" rounded="lg" _text={{
+          <Center size="20" bg="#9C5D26" rounded="lg" _text={{
             color: "warmGray.50",
             fontWeight: "medium"
           }} shadow={"3"}>
@@ -94,21 +168,21 @@ function Menu() {
       </VStack>
       <VStack space="2.5" mt="3" px="4">
         <Stack direction="row" mb="2.5" mt="1.5" space={3}>
-          <Center size="20" bg="primary.400" rounded="lg" _text={{
+          <Center size="20" bg="#C8742A" rounded="lg" _text={{
             color: "warmGray.50",
             fontWeight: "medium"
           }} shadow={"3"}>
             Iva Mês Anterior
             <Text fontSize="md" color="white">1500€</Text>
           </Center>
-          <Center bg="primary.500" size="20" rounded="lg" _text={{
+          <Center bg="#C6620A" size="20" rounded="lg" _text={{
             color: "warmGray.50",
             fontWeight: "medium"
           }} shadow={"3"}>
             Iva Mês Atual
             <Text fontSize="md" color="white">15000€</Text>
           </Center>
-          <Center size="20" bg="primary.700" rounded="lg" _text={{
+          <Center size="20" bg="#9C5D26" rounded="lg" _text={{
             color: "warmGray.50",
             fontWeight: "medium"
           }} shadow={"3"}>
@@ -204,4 +278,9 @@ const styles = StyleSheet.create({
   Pie: {
     backgroundColor: 'black'
   },
+  heading: {
+    fontFamily: "Papyrus",
+    fontSize: 24,
+    fontWeight: 700
+  }
 });
