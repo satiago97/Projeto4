@@ -63,3 +63,7 @@ class OrcamentosService {
         });
     }
 }
+
+
+const orcamentosService = new OrcamentosService();
+export default orcamentosService;
