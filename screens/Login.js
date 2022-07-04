@@ -80,7 +80,7 @@ export default function Login({ navigation }) {
         <TextInput
           style={styles.input}
           placeholder="Username"
-          placeholderTextColor="#000" 
+          placeholderTextColor="#000"
           autoCorrect={false}
           value={username}
           onChangeText={value => setUsername(value)}
@@ -88,9 +88,10 @@ export default function Login({ navigation }) {
         />
 
         <TextInput
+          secureTextEntry={true}
           style={styles.input}
           placeholder="Password"
-          placeholderTextColor="#000" 
+          placeholderTextColor="#000"
           autoCorrect={false}
           value={password}
           onChangeText={value => setPassword(value)}
