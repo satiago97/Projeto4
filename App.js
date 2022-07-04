@@ -16,6 +16,8 @@ import Compras from './screens/Compras';
 import Analise from './screens/Analise';
 import Clientes from './screens/Clientes';
 import Artigos from './screens/Artigos';
+import Bancos from './screens/Bancos';
+import AddBanco from './screens/AddBanco';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -80,6 +82,17 @@ export default function App() {
             name="Artigos"
             component={Artigos}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="Banks"
+            name="Bancos"
+            component={Bancos}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="AddBanks"
+            name="Adicionar Banco"
+            component={AddBanco}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -25,7 +25,7 @@ export default class Tabelas extends Component {
         { id: 5, title: 'Clientes', image: 'https://img.icons8.com/color-glass/96/000000/check-in-desk.png', route: 'Clientes' },
         { id: 6, title: 'Fornecedores', image: 'https://img.icons8.com/color/96/000000/supplier.png', route: '' },
         { id: 7, title: 'Movimentos Caixa', image: 'https://img.icons8.com/color/96/000000/atm.png', route: '' },
-        { id: 8, title: 'Centros de Custo', image: 'https://img.icons8.com/color/96/000000/expensive.png', route: '' },
+        { id: 8, title: 'Bancos', image: 'https://img.icons8.com/color/96/000000/expensive.png', route: 'Bancos' },
         { id: 9, title: 'Referências de Pagamento', image: 'https://img.icons8.com/color/96/000000/invoice.png', route: '' },
       ]
     };
