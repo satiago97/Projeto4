@@ -23,7 +23,7 @@ export default class Tabelas extends Component {
         { id: 3, title: 'Abate de Artigos', image: 'https://img.icons8.com/color/96/000000/used-product.png', route: '' },
         { id: 4, title: 'Stocks Mínimos', image: 'https://img.icons8.com/color/96/000000/sell-stock.png', route: '' },
         { id: 5, title: 'Clientes', image: 'https://img.icons8.com/color-glass/96/000000/check-in-desk.png', route: 'Clientes' },
-        { id: 6, title: 'Fornecedores', image: 'https://img.icons8.com/color/96/000000/supplier.png', route: '' },
+        { id: 6, title: 'Fornecedores', image: 'https://img.icons8.com/color/96/000000/supplier.png', route: 'Fornecedores' },
         { id: 7, title: 'Movimentos Caixa', image: 'https://img.icons8.com/color/96/000000/atm.png', route: '' },
         { id: 8, title: 'Bancos', image: 'https://img.icons8.com/color/96/000000/expensive.png', route: 'Bancos' },
         { id: 9, title: 'Referências de Pagamento', image: 'https://img.icons8.com/color/96/000000/invoice.png', route: '' },
