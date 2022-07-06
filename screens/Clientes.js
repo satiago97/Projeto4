@@ -68,7 +68,7 @@ export default class Clientes extends Component {
         clientsService.deletecliente(id);
         clientsService.getclientes().then(response => {
             this.setState({
-                dataSource: response.data.aaData
+                dataSource: response.data.aaData,
             })
         });
     }

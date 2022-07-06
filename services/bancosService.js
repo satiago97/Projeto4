@@ -67,6 +67,21 @@ class BancosService {
 
     }
 
+    async deleteBanco(id) {
+        var token = await this.getToken();
+        return axios({
+            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/bancos',
+            method: 'DELETE',
+            timeout: 5000,
+            data: qs.stringify({
+                opcao: '4',
+                _token: token,
+                idBanco: id,
+            }),
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        });
+    }
+
 }
 
 

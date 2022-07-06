@@ -63,6 +63,15 @@ export default class Bancos extends Component {
         })
     }
 
+    deleteBanco = (id) => {
+        bancosService.deleteBanco(id);
+        bancosService.getBancos().then(response => {
+            this.setState({
+                dataSource: response.data.aaData,
+            })
+        })
+    }
+
 
     render() {
         let { container } = styles;
@@ -111,12 +120,7 @@ export default class Bancos extends Component {
                                         uri: 'https://img.icons8.com/color/48/000000/eyes-cartoon.png'
                                     }} />
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.editCli()}>
-                                    <Image size="20px" alt='editImage' source={{
-                                        uri: 'https://img.icons8.com/color/48/000000/edit--v1.png'
-                                    }} />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.deleteCli()}>
+                                <TouchableOpacity onPress={() => this.deleteBanco(item.id)}>
                                     <Image size="20px" alt='deleteImage' source={{
                                         uri: 'https://img.icons8.com/plasticine/100/000000/filled-trash.png'
                                     }} />
