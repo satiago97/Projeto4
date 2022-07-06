@@ -20,6 +20,7 @@ export default class Orcamentos extends Component {
                     id: 1,
                     title: "Orçamentos",
                     image: "https://img.icons8.com/color/96/000000/budget.png",
+                    route: 'OrcamentosDetalhes',
                 },
                 {
                     id: 1,
@@ -60,16 +61,8 @@ export default class Orcamentos extends Component {
                     renderItem={({ item }) => {
                         return (
                             <View>
-                                <TouchableOpacity
-                                    style={styles.card}
-                                    onPress={() => {
-                                        this.clickEventListener(item);
-                                    }}
-                                >
-                                    <Image
-                                        style={styles.cardImage}
-                                        source={{ uri: item.image }}
-                                    />
+                                <TouchableOpacity style={styles.card} onPress={() => this.props.navigation.navigate(item.route)}>
+                                    <Image style={styles.cardImage} source={{ uri: item.image }} />
                                 </TouchableOpacity>
 
                                 <View style={styles.cardHeader}>
