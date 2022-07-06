@@ -1,9 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect, Component } from 'react';
 import clientsService from '../services/clientsService';
-import { ActivityIndicator } from 'react-native';
 import { Center, Modal, Heading, VStack, Input, Button, Box, HStack, Avatar, Spacer, Image } from "native-base";
-
+import { FloatingAction } from "react-native-floating-action";
 import {
     SafeAreaView,
     ScrollView,
@@ -20,6 +19,33 @@ import {
 } from 'react-native';
 
 import Swiper from 'react-native-swiper';
+
+const actions = [
+    {
+      text: "Accessibility",
+      icon: { uri: 'https://cdn-icons-png.flaticon.com/512/6461/6461113.png' },
+      name: "bt_accessibility",
+      position: 2
+    },
+    {
+      text: "Language",
+      icon: require("./adicionar.png"),
+      name: "bt_language",
+      position: 1
+    },
+    {
+      text: "Location",
+      icon: require("./adicionar.png"),
+      name: "bt_room",
+      position: 3
+    },
+    {
+      text: "Video",
+      icon: require("./adicionar.png"),
+      name: "bt_videocam",
+      position: 4
+    }
+  ]
 
 
 export default class Clientes extends Component {
@@ -106,7 +132,7 @@ export default class Clientes extends Component {
         }
        
         return (
-
+            <View style={{ flex: 1}}>
             <Box>
                 <Heading fontSize="xl" p="4" pb="3">
                     Clientes
@@ -252,8 +278,18 @@ export default class Clientes extends Component {
                             </Button.Group>
                         </Modal.Footer>
                         </Modal.Content>
-                    </Modal>      
-            </Box>
+                    </Modal>
+            </Box> 
+                    <FloatingAction
+                        color='#AF7633'      
+                        actions={actions}
+                        onPressItem={name => {
+                        console.log(`selected button: ${name}`);
+                        }}
+                    />
+                    </View>
+         
+
         )
     }
 
