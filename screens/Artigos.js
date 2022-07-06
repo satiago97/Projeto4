@@ -49,7 +49,7 @@ export default class Artigos extends Component {
         return (
             <Box>
                 <Heading fontSize="xl" p="4" pb="3">
-                    Clientes
+                    Artigos
                 </Heading>
                 <FlatList data={array} renderItem={({
                     item
@@ -69,7 +69,7 @@ export default class Artigos extends Component {
                                 <Text color="coolGray.600" _dark={{
                                     color: "warmGray.200"
                                 }}>
-                                    <Text style={{ fontWeight: "bold" }}>Nome do cliente:</Text> {item.nome}
+                                    <Text style={{ fontWeight: "bold" }}>Nome do artigo:</Text> {item.nome}
                                 </Text>
                             </VStack>
                             <Spacer />
