@@ -45,13 +45,33 @@ export default class OrcamentosDetails extends Component {
         });
     }
 
+    getOrcamentoDetails = (id) => {
+        orcamentosService.getOrcamentosDetail(id).then(response => {
+            this.setState({
+                isLoading: false,
+                dataOrcamento: response.data.data,
+                showModal: true,
+            })
+        });
+    }
+
+    deleteOrcamento = (id) => {
+        orcamentosService.deleteOrcamento(id);
+        orcamentosService.getOrcamentos().then(response => {
+            this.setState({
+                dataSource: response.data.aaData,
+            })
+        });
+    }
+
+
     render() {
         let { container } = styles;
         let { dataSource, dataOrcamento, isLoading, array, showModal, showModalEdit } = this.state;
 
 
         for (let i = 0; i < dataSource.length; i++) {
-            array[i] = { 'id': dataSource[i][0], 'nome': dataSource[i][2], "idFatura": dataSource[i][9] };
+            array[i] = { 'id': dataSource[i][0], 'nome': dataSource[i][2], "total": dataSource[i][6] };
         }
 
         return (
@@ -77,20 +97,18 @@ export default class OrcamentosDetails extends Component {
                                 <Text style={{ color: 'black' }}>
                                     <Text style={{ fontWeight: "bold" }}>Nome do cliente:</Text> {item.nome}
                                 </Text>
+                                <Text style={{ color: 'black' }}>
+                                    <Text style={{ fontWeight: "bold", color: 'black' }}>Total €:</Text> {Number.parseFloat(item.total)}
+                                </Text>
                             </VStack>
                             <Spacer />
                             <VStack>
-                                <TouchableOpacity onPress={() => this.getCli(item.idCliente)}>
+                                <TouchableOpacity onPress={() => this.getOrcamentoDetails(item.id)}>
                                     <Image size="20px" alt='viewImage' source={{
                                         uri: 'https://img.icons8.com/color/48/000000/eyes-cartoon.png'
                                     }} />
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.editCli(item.idCliente)}>
-                                    <Image size="20px" alt='editImage' source={{
-                                        uri: 'https://img.icons8.com/color/48/000000/edit--v1.png'
-                                    }} />
-                                </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.deleteCli(item.idCliente)}>
+                                <TouchableOpacity onPress={() => this.deleteOrcamento(item.id)}>
                                     <Image size="20px" alt='deleteImage' source={{
                                         uri: 'https://img.icons8.com/plasticine/100/000000/filled-trash.png'
                                     }} />
@@ -103,103 +121,23 @@ export default class OrcamentosDetails extends Component {
                 <Modal isOpen={showModal} onClose={() => this.setState({ showModal: false })}>
                     <Modal.Content maxWidth="400px">
                         <Modal.CloseButton />
-                        <Modal.Header>{dataOrcamento}</Modal.Header>
+                        <Modal.Header>{dataOrcamento.ID_Orcamento}</Modal.Header>
                         <Modal.Body>
                             <Swiper style={styles.wrapper} showsButtons={true}>
                                 <View style={styles.slide1}>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>NIF: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Codigo: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Codigo Interno: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Endereço: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Codigo Postal: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Localidade: </Text>{dataOrcamento}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Cliente: </Text>{dataOrcamento.Cliente}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>NIF: </Text>{dataOrcamento.Nif}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Endereco Cliente: </Text>{dataOrcamento.EnderecoCliente}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Cidade Cliente: </Text>{dataOrcamento.CidadeCliente}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Data Validade: </Text>{dataOrcamento.DataValidade}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>% Desconto: </Text>{dataOrcamento.PercentagemDesconto}</Text></Center>
                                 </View>
                                 <View style={styles.slide2}>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Cidade: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Pais: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Região: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Email: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Telefone: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Telemovel: </Text>{dataOrcamento}</Text></Center>
-                                </View>
-                                <View style={styles.slide3}>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Fax: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Website: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Vencimento: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Desconto: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Ativo: </Text>{dataOrcamento}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Isenção IVA: </Text>{dataOrcamento}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Moeda: </Text>{dataOrcamento.Moeda}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Taxa Moeda: </Text>{dataOrcamento.TaxaMoeda}</Text></Center>
                                 </View>
                             </Swiper>
                         </Modal.Body>
-                    </Modal.Content>
-                </Modal>
-
-                {/*Modal Editar Cliente */}
-                <Modal isOpen={showModalEdit} onClose={() => this.setState({ showModalEdit: false })}>
-                    <Modal.Content maxWidth="400px">
-                        <Modal.CloseButton />
-                        <Modal.Header>{dataOrcamento}</Modal.Header>
-                        <Modal.Body>
-                            <Swiper style={styles.wrapper} showsButtons={false}>
-                                <View style={styles.slide1}>
-                                    <Text style={styles.Label}>Nif</Text>
-                                    <Input type='number' size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Nif: text } })} />
-                                    <Text style={styles.Label}>Codigo</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Codigo: text } })} />
-                                    <Text style={styles.Label}>Codigo Interno</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, CodigoInterno: text } })} />
-                                    <Text style={styles.Label}>Endereço</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Endereco: text } })} />
-                                    <Text style={styles.Label}>Codigo Postal</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, CodigoPostal: text } })} />
-                                    <Text style={styles.Label}>Localidade</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Localidade: text } })} />
-                                </View>
-                                <View style={styles.slide2}>
-                                    <Text style={styles.Label}>Cidade</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Cidade: text } })} />
-                                    <Text style={styles.Label}>Pais</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Pais: text } })} />
-                                    <Text style={styles.Label}>Região</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Regiao: text } })} />
-                                    <Text style={styles.Label}>Email</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Email: text } })} />
-                                    <Text style={styles.Label}>Telefone</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Telefone: text } })} />
-                                    <Text style={styles.Label}>Telemovel</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Telemovel: text } })} />
-                                </View>
-                                <View style={styles.slide3}>
-                                    <Text style={styles.Label}>Fax</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Fax: text } })} />
-                                    <Text style={styles.Label}>Website</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Website: text } })} />
-                                    <Text style={styles.Label}>Vencimento</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Vencimento: text } })} />
-                                    <Text style={styles.Label}>Desconto</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Desconto: text } })} />
-                                    <Text style={styles.Label}>Ativo</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, Ativo: text } })} />
-                                    <Text style={styles.Label}>Isenção IVA</Text>
-                                    <Input size="xs" variant="underlined" value={dataOrcamento} onChangeText={(text) => this.setState({ dataCliente: { ...this.state.dataCliente, IsencaoIVA: text } })} />
-                                </View>
-                            </Swiper>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button.Group space={2}>
-                                <Button variant="ghost" colorScheme="blueGray" onPress={() => {
-                                    this.setState({ showModalEdit: false })
-                                }}>
-                                    Cancel
-                                </Button>
-                                <Button bg={'#CCAC6E'} onPress={() => {
-                                    this.submitEditCliente();
-                                }}>
-                                    Save
-                                </Button>
-                            </Button.Group>
-                        </Modal.Footer>
                     </Modal.Content>
                 </Modal>
             </Box>
