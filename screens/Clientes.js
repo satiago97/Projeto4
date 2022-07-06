@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect, Component } from 'react';
 import clientsService from '../services/clientsService';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, RefreshControl, ToastAndroid } from 'react-native';
 import { Center, Modal, Heading, VStack, Input, Button, Box, HStack, Avatar, Spacer, Image } from "native-base";
 
 import {
@@ -16,7 +16,7 @@ import {
     LayoutAnimation,
     TouchableOpacity,
     FlatList,
-    DevSettings
+    DevSettings,
 } from 'react-native';
 
 import Swiper from 'react-native-swiper';
@@ -66,10 +66,13 @@ export default class Clientes extends Component {
         console.log("deleteCli")
         var id = idCliente;
         clientsService.deletecliente(id);
+        ToastAndroid.show('Cliente eliminado com sucesso', ToastAndroid.SHORT)
         clientsService.getclientes().then(response => {
             this.setState({
                 dataSource: response.data.aaData,
             })
+
+
         });
     }
 
@@ -283,5 +286,13 @@ const styles = StyleSheet.create({
         color: '#000',
         fontSize: 15,
         fontWeight: 'bold',
-    }
+    },
+    button: {
+        alignItems: "center",
+        backgroundColor: "#9C5D26",
+        padding: 10,
+        justifyContent: "center",
+        marginLeft: 50,
+        marginRight: 50,
+    },
 });

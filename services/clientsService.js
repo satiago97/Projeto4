@@ -50,11 +50,11 @@ class ClientsService {
             url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/clientes',
             method: 'PUT',
             timeout: 5000,
-            data : qs.stringify({
+            data: qs.stringify({
                 opcao: '3',
                 _token: token,
                 idCliente: dadosCli.ID_Cliente,
-                nome_cliente: dadosCli.Nome ,
+                nome_cliente: dadosCli.Nome,
                 nif_cliente: dadosCli.Nif,
                 pais_cliente: dadosCli.Pais,
                 endereco_cliente: dadosCli.Endereco,
@@ -75,9 +75,27 @@ class ClientsService {
                 desconto_cliente: dadosCli.Desconto,
                 flagContaGeral: dadosCli.Flag,
                 codigo_interno_cliente: dadosCli.CodigoInterno,
-        }),
-                headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            }),
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
         });
+    }
+
+
+    async insertCliente(nome_cliente, nif_cliente) {
+        console.log("nome" + nome_cliente, "nif" + nif_cliente)
+        var token = await this.getToken();
+        return axios({
+            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/clientes',
+            method: 'POST',
+            timeout: 5000,
+            data: qs.stringify({
+                opcao: '2',
+                _token: token,
+                nome_cliente: nome_cliente,
+                nif_cliente: nif_cliente,
+            }),
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        })
     }
 
 
@@ -88,12 +106,12 @@ class ClientsService {
             url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/clientes',
             method: 'DELETE',
             timeout: 5000,
-            data : qs.stringify({
+            data: qs.stringify({
                 opcao: '4',
                 _token: token,
                 idCliente: id
-                }),
-                headers: { 'content-type': 'application/x-www-form-urlencoded' },
+            }),
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
         });
     }
 }

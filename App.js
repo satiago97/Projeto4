@@ -21,6 +21,7 @@ import AddBanco from './screens/AddBanco';
 import Fornecedores from './screens/Fornecedores';
 import CategoriasArtigos from './screens/CategoriasArtigos';
 
+
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -108,6 +109,7 @@ export default function App() {
             component={CategoriasArtigos}
             options={{ headerShown: false }}
           />
+
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
