@@ -18,7 +18,7 @@ export default class Tabelas extends Component {
     super(props);
     this.state = {
       data: [
-        { id: 1, title: 'Categorias de Artigos', image: 'https://img.icons8.com/color/96/000000/category.png', route: '' },
+        { id: 1, title: 'Categorias de Artigos', image: 'https://img.icons8.com/color/96/000000/category.png', route: 'Categorias' },
         { id: 2, title: 'Artigos', image: 'https://img.icons8.com/doodle/96/000000/used-product.png', route: 'Artigos' },
         { id: 3, title: 'Abate de Artigos', image: 'https://img.icons8.com/color/96/000000/used-product.png', route: '' },
         { id: 4, title: 'Stocks Mínimos', image: 'https://img.icons8.com/color/96/000000/sell-stock.png', route: '' },

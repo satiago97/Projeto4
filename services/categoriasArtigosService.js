@@ -27,6 +27,22 @@ class CategoriasArtigosService {
         });
     }
 
+    async deleteCategorias(id) {
+        var token = await this.getToken();
+        return axios({
+            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/categorias_artigos',
+            method: 'DELETE',
+            timeout: 5000,
+            params: {
+                opcao: '3',
+                _token: token,
+                idCategoria: id,
+            },
+            headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        });
+
+    }
+
 
 }
 
