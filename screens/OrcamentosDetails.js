@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect, Component } from 'react';
 import orcamentosService from '../services/orcamentosService';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, ToastAndroid } from 'react-native';
 import { Center, Modal, Heading, VStack, Input, Button, Box, HStack, Avatar, Spacer, Image } from "native-base";
 
 import {
@@ -64,6 +64,11 @@ export default class OrcamentosDetails extends Component {
         });
     }
 
+    finalizarOrcamento = (id) => {
+        orcamentosService.finalizarOrcamento(id);
+        ToastAndroid.show('Orçamento finalizado com sucesso', ToastAndroid.SHORT)
+    }
+
 
     render() {
         let { container } = styles;
@@ -111,6 +116,11 @@ export default class OrcamentosDetails extends Component {
                                 <TouchableOpacity onPress={() => this.deleteOrcamento(item.id)}>
                                     <Image size="20px" alt='deleteImage' source={{
                                         uri: 'https://img.icons8.com/plasticine/100/000000/filled-trash.png'
+                                    }} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.finalizarOrcamento(item.id)}>
+                                    <Image size="20px" alt='viewImage' source={{
+                                        uri: 'https://img.icons8.com/external-basicons-color-edtgraphics/50/000000/external-flag-flags-edtim-flat-edtim-13.png'
                                     }} />
                                 </TouchableOpacity>
                             </VStack>
