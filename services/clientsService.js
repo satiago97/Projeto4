@@ -114,6 +114,40 @@ class ClientsService {
             headers: { 'content-type': 'application/x-www-form-urlencoded' },
         });
     }
+
+
+    async addcliente(dadosCli) {
+        console.log(dadosCli);
+        var token = await this.getToken();
+        return axios({
+            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/tabelas/clientes',
+            method: 'POST',
+            timeout: 5000,
+            data : {
+                opcao: '2',
+                _token: token,
+                nome_cliente: dadosCli.Nome ,
+                nif_cliente: dadosCli.Nif,
+                pais_cliente: dadosCli.Pais,
+                endereco_cliente: dadosCli.Endereco,
+                codigopostal_cliente: dadosCli.CodigoPostal,
+                regiao_cliente: dadosCli.Regiao,
+                cidade_cliente: dadosCli.Cidade,
+                email_cliente: dadosCli.Email,
+                website_cliente: dadosCli.Website,
+                tlm_cliente: dadosCli.Telemovel,
+                tlf_cliente: dadosCli.Telefone,
+                fax_cliente: dadosCli.Fax,
+                vencimento_cliente: dadosCli.Vencimento,
+                desconto_cliente: dadosCli.Desconto,
+        },
+        headers: {
+            Accept: 'application/json',
+        }
+        });
+    }
+
+
 }
 
 const clientsService = new ClientsService();

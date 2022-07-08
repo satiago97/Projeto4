@@ -21,6 +21,8 @@ import AddBanco from './screens/AddBanco';
 import Fornecedores from './screens/Fornecedores';
 import CategoriasArtigos from './screens/CategoriasArtigos';
 import OrcamentosDetails from './screens/OrcamentosDetails';
+import ComprasDetails from './screens/ComprasDetails';
+import Faturas from './screens/Faturas';
 
 
 const Stack = createNativeStackNavigator();
@@ -114,6 +116,18 @@ export default function App() {
             title="OrcamentosDetalhes"
             name="OrcamentosDetalhes"
             component={OrcamentosDetails}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="ComprasDetails"
+            name="ComprasDetails"
+            component={ComprasDetails}
+            options={{ headerShown: false }}
+          />
+            <Stack.Screen
+            title="Faturas"
+            name="Faturas"
+            component={Faturas}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

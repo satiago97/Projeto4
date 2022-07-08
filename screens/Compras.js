@@ -17,11 +17,11 @@ export default class Compras extends Component {
         super(props);
         this.state = {
             data: [
-                { id: 1, title: "Compras", image: "https://img.icons8.com/color/96/000000/shopping-cart-loaded.png" },
-                { id: 2, title: "Notas de crédito", image: "https://img.icons8.com/color/96/000000/bank-card-front-side.png" },
-                { id: 3, title: "Recibos", image: "https://img.icons8.com/color/96/000000/purchase-order.png" },
-                { id: 4, title: "Compras e-Fatura", image: "https://img.icons8.com/color/96/000000/email-sign.png" },
-                { id: 5, title: "Arquivo e-Fatura", image: "https://img.icons8.com/color/96/000000/file.png" },
+                { id: 1, title: "Compras", image: "https://img.icons8.com/color/96/000000/shopping-cart-loaded.png" , route: 'ComprasDetails'},
+                { id: 2, title: "Notas de crédito", image: "https://img.icons8.com/color/96/000000/bank-card-front-side.png", route: '' },
+                { id: 3, title: "Recibos", image: "https://img.icons8.com/color/96/000000/purchase-order.png", route: '' },
+                { id: 4, title: "Compras e-Fatura", image: "https://img.icons8.com/color/96/000000/email-sign.png" , route: '' },
+                { id: 5, title: "Arquivo e-Fatura", image: "https://img.icons8.com/color/96/000000/file.png", route: '' },
             ]
         };
     }
@@ -44,7 +44,7 @@ export default class Compras extends Component {
                     renderItem={({ item }) => {
                         return (
                             <View>
-                                <TouchableOpacity style={styles.card} onPress={() => { this.clickEventListener(item) }}>
+                                <TouchableOpacity style={styles.card} onPress={() => {  this.props.navigation.navigate(item.route) }}>
                                     <Image style={styles.cardImage} source={{ uri: item.image }} />
                                 </TouchableOpacity>
 

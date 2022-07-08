@@ -2,8 +2,8 @@
 import React, { useState, useEffect, Component } from 'react';
 import comprasService from '../services/comprasService';
 import { ActivityIndicator } from 'react-native';
-import { Center, Modal, Heading, VStack, Input, Button, Box, HStack, Avatar, Spacer, Image } from "native-base";
-
+import { Center, Modal, Heading, VStack, Input, Button, Box, HStack, Avatar, Spacer, Image , Divider } from "native-base";
+import { FloatingAction } from "react-native-floating-action";
 import {
     SafeAreaView,
     ScrollView,
@@ -21,6 +21,14 @@ import {
 
 import Swiper from 'react-native-swiper';
 
+const actions = [
+    {
+      text: "Nova Compra",
+      icon: { uri: 'https://img.icons8.com/material-outlined/48/000000/plus--v1.png' },
+      name: "bt_add",
+      position: 1
+    }
+  ]
 
 export default class ComprasDetails extends Component {
     constructor(props) {
@@ -36,6 +44,40 @@ export default class ComprasDetails extends Component {
     }
 
 
+    getCompra = (idCompra) => {
+        var id = idCompra;
+        console.log("getCompra")
+        comprasService.getComprasDetails(id).then(response => {
+            this.setState({
+                isLoading: false,
+                datacompras: response.data.data,
+                showModal: true
+            })
+            console.log(this.state.datacompras)
+        });
+    }
+
+    finalizarCompra = (idCompra) => {
+        var id = idCompra;
+        console.log("Finalizar")
+        comprasService.finalizarCompra(id).then(response => {
+            this.setState({
+                isLoading: false,
+            })
+        });
+    }
+
+    anularCompra = (idCompra) => {
+        var id = idCompra;
+        console.log("Anular")
+        comprasService.anularCompra(id).then(response => {
+            this.setState({
+                isLoading: false,
+            })
+        });
+    }
+
+
     componentDidMount() {
         comprasService.getCompras().then(response => {
             this.setState({
@@ -48,18 +90,31 @@ export default class ComprasDetails extends Component {
     render() {
         let { container } = styles;
         let { dataSource, datacompras, isLoading, array, showModal, showModalEdit } = this.state;
-
-
+        console.log(dataSource)
+        let color;
         for (let i = 0; i < dataSource.length; i++) {
-            array[i] = { 'id': dataSource[i][0], 'nome': dataSource[i][2], "idFatura": dataSource[i][9] };
+            if(dataSource[i][7] == "Pago"){
+                color = "#6bff77"
+            }else if(dataSource[i][7] == "Aberto"){
+                color = "#4287f5"
+            }else if(dataSource[i][7] == "Rascunho"){
+                color = "#ffd333"
+            }else{
+                color = "#f7693e"
+            }
+            array[i] = { 'id': dataSource[i][0], 'nome': dataSource[i][1], "idCompra": dataSource[i][8] , "total": Math.round( dataSource[i][5] * 100) / 100 , "color" : color , "estado": dataSource[i][7]};
         }
-
+        console.log(array)
         return (
-
+            <View style={{ flex: 1}}>
             <Box>
                 <Heading fontSize="xl" p="4" pb="3">
-                    Faturas
+                    Compras
                 </Heading>
+                <VStack w="70%" space={5} alignSelf="center">
+                    <Input placeholder="Search" placeholderTextColor={"#000"} bg={'#CCAC6E'} variant="filled" width="100%" borderRadius="10" py="1" px="2" borderWidth="0" InputRightElement={<TouchableOpacity style={{marginRight: 10}} onPress={() => console.log("asd")}><Image size="20px" alt='viewImage' source={{uri: 'https://img.icons8.com/ios/50/000000/search--v1.png'}} /></TouchableOpacity>} />
+                </VStack>
+                <Divider margin={'5'} />
                 <FlatList data={array} renderItem={({
                     item
                 }) =>
@@ -72,27 +127,32 @@ export default class ComprasDetails extends Component {
                             }} />
                             <VStack width="70%">
                                 <Text style={{ color: 'black' }}>
-                                    <Text style={{ fontWeight: "bold", color: 'black' }}>ID:</Text> {item.id}
+                                    <Text style={{ fontWeight: "bold", color: 'black' }}>ID:</Text> {item.idCompra} <View style={{ backgroundColor: item.color, width: 10,height: 10,borderRadius: 10/2}}></View>
                                 </Text>
                                 <Text style={{ color: 'black' }}>
-                                    <Text style={{ fontWeight: "bold" }}>Nome do cliente:</Text> {item.nome}
+                                    <Text style={{ fontWeight: "bold" }}>Nome do Fornecedor:</Text> {item.nome}
+                                </Text>
+                                <Text style={{ color: 'black' }}>
+                                    <Text style={{ fontWeight: "bold" }}>Total:</Text> {item.total} €
                                 </Text>
                             </VStack>
                             <Spacer />
                             <VStack>
-                                <TouchableOpacity onPress={() => this.getCli(item.idCliente)}>
+                                <TouchableOpacity onPress={() => this.getCompra(item.idCompra)}>
                                     <Image size="20px" alt='viewImage' source={{
                                         uri: 'https://img.icons8.com/color/48/000000/eyes-cartoon.png'
                                     }} />
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.editCli(item.idCliente)}>
+                               { item.estado === "Rascunho" &&
+                                <TouchableOpacity onPress={() => this.anularCompra(item.idCompra)}>
                                     <Image size="20px" alt='editImage' source={{
-                                        uri: 'https://img.icons8.com/color/48/000000/edit--v1.png'
+                                        uri: 'https://img.icons8.com/ios-glyphs/30/FA5252/xbox-x.png'
                                     }} />
                                 </TouchableOpacity>
-                                <TouchableOpacity onPress={() => this.deleteCli(item.idCliente)}>
-                                    <Image size="20px" alt='deleteImage' source={{
-                                        uri: 'https://img.icons8.com/plasticine/100/000000/filled-trash.png'
+                                }
+                                <TouchableOpacity onPress={() => this.finalizarCompra(item.idCompra)}>
+                                    <Image size="20px" alt='editImage' source={{
+                                        uri: 'https://img.icons8.com/color/48/000000/checked-checkbox.png'
                                     }} />
                                 </TouchableOpacity>
                             </VStack>
@@ -103,39 +163,28 @@ export default class ComprasDetails extends Component {
                 <Modal isOpen={showModal} onClose={() => this.setState({ showModal: false })}>
                     <Modal.Content maxWidth="400px">
                         <Modal.CloseButton />
-                        <Modal.Header>{datacompras}</Modal.Header>
+                        <Modal.Header>Detalhes Compra</Modal.Header>
                         <Modal.Body>
                             <Swiper style={styles.wrapper} showsButtons={true}>
                                 <View style={styles.slide1}>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>NIF: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Codigo: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Codigo Interno: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Endereço: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Codigo Postal: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Localidade: </Text>{datacompras}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Numero: </Text>{datacompras}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Fornecedor: </Text>{datacompras}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Nif: </Text>{datacompras}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Data: </Text>{datacompras}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Validade: </Text>{datacompras}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Total: </Text>{datacompras}</Text></Center>
                                 </View>
                                 <View style={styles.slide2}>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Cidade: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Pais: </Text>{datacompras}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Saldo: </Text>{datacompras}</Text></Center>
+                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Estado: </Text>{datacompras}</Text></Center>
                                     <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Região: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Email: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Telefone: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Telemovel: </Text>{datacompras}</Text></Center>
-                                </View>
-                                <View style={styles.slide3}>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Fax: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Website: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Vencimento: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Desconto: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Ativo: </Text>{datacompras}</Text></Center>
-                                    <Center w="64" h="10" bg="#AF7633" rounded="lg" shadow={3} marginTop={5}><Text style={styles.text}><Text style={styles.Label}>Isenção IVA: </Text>{datacompras}</Text></Center>
                                 </View>
                             </Swiper>
                         </Modal.Body>
                     </Modal.Content>
                 </Modal>
 
-                {/*Modal Editar Cliente */}
+                {/*Modal Editar */}
                 <Modal isOpen={showModalEdit} onClose={() => this.setState({ showModalEdit: false })}>
                     <Modal.Content maxWidth="400px">
                         <Modal.CloseButton />
@@ -194,7 +243,7 @@ export default class ComprasDetails extends Component {
                                     Cancel
                                 </Button>
                                 <Button bg={'#CCAC6E'} onPress={() => {
-                                    this.submitEditCliente();
+                                    this.submitEditCompra();
                                 }}>
                                     Save
                                 </Button>
@@ -203,6 +252,16 @@ export default class ComprasDetails extends Component {
                     </Modal.Content>
                 </Modal>
             </Box>
+            <FloatingAction
+            color='#AF7633'      
+            actions={actions}
+            onPressItem={name => {
+            if(name == 'bt_add'){
+                 this.setState({ showModalAdd: true })
+            }
+            }}
+        />
+        </View>
         )
     }
 }

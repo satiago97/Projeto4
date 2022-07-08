@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect, Component } from 'react';
 import clientsService from '../services/clientsService';
-import { Center, Modal, Heading, VStack, Input, Button, Box, HStack, Avatar, Spacer, Image } from "native-base";
+import { Center, Modal, Heading, VStack, Input, Button, Box, HStack, Avatar, Spacer, Image , Icon , Divider } from "native-base";
+import { Ionicons , FontAwesome  } from "@expo/vector-icons";
 import { FloatingAction } from "react-native-floating-action";
 import {
     SafeAreaView,
@@ -22,28 +23,10 @@ import Swiper from 'react-native-swiper';
 
 const actions = [
     {
-      text: "Accessibility",
-      icon: { uri: 'https://cdn-icons-png.flaticon.com/512/6461/6461113.png' },
-      name: "bt_accessibility",
-      position: 2
-    },
-    {
-      text: "Language",
-      icon: require("./adicionar.png"),
-      name: "bt_language",
+      text: "Adicionar",
+      icon: { uri: 'https://img.icons8.com/material-outlined/48/000000/plus--v1.png' },
+      name: "bt_add",
       position: 1
-    },
-    {
-      text: "Location",
-      icon: require("./adicionar.png"),
-      name: "bt_room",
-      position: 3
-    },
-    {
-      text: "Video",
-      icon: require("./adicionar.png"),
-      name: "bt_videocam",
-      position: 4
     }
   ]
 
@@ -57,7 +40,9 @@ export default class Clientes extends Component {
             array: [],
             showModal: false,
             showModalEdit: false,
-            dataCliente: []
+            showModalAdd: false,
+            dataCliente: [],
+            newCliente: []
         }
     }
 
@@ -113,6 +98,12 @@ export default class Clientes extends Component {
 
     }
 
+    
+    submitAddCliente = () => {
+        clientsService.addcliente(this.state.newCliente).then(response => {
+            this.setState({ showModalAdd: false })
+        });
+    }
 
     componentDidMount() {
         clientsService.getclientes().then(response => {
@@ -127,7 +118,7 @@ export default class Clientes extends Component {
 
     render() {
         let { container } = styles;
-        let { dataSource, dataCliente, dadosCli, isLoading, array, showModal, showModalEdit } = this.state;
+        let { dataSource, dataCliente, newCliente, isLoading, array, showModal, showModalEdit , showModalAdd } = this.state;
 
 
         for (let i = 0; i < dataSource.length; i++) {
@@ -140,6 +131,10 @@ export default class Clientes extends Component {
                 <Heading fontSize="xl" p="4" pb="3">
                     Clientes
                 </Heading>
+                <VStack w="70%" space={5} alignSelf="center">
+                    <Input placeholder="Search" placeholderTextColor={"#000"} bg={'#CCAC6E'} variant="filled" width="100%" borderRadius="10" py="1" px="2" borderWidth="0" InputRightElement={<TouchableOpacity style={{marginRight: 10}} onPress={() => console.log("asd")}><Image size="20px" alt='viewImage' source={{uri: 'https://img.icons8.com/ios/50/000000/search--v1.png'}} /></TouchableOpacity>} />
+                </VStack>
+                <Divider margin={'5'} />
                 <FlatList data={array} renderItem={({
                     item
                 }) =>
@@ -282,12 +277,78 @@ export default class Clientes extends Component {
                         </Modal.Footer>
                         </Modal.Content>
                     </Modal>
+
+
+
+                                 {/*Modal Add Cliente */}
+                <Modal isOpen={showModalAdd} onClose={() => this.setState({ showModalAdd: false })}>
+                    <Modal.Content maxWidth="400px">
+                        <Modal.CloseButton />
+                        <Modal.Header>Novo Cliente</Modal.Header>
+                        <Modal.Body>
+                            <Swiper style={styles.wrapper} showsButtons={false}>
+                                <View style={styles.slide1}>
+                                    <Text style={styles.Label}>Nome</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Nome" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Nome: text } })} />
+                                    <Text style={styles.Label}>Nif</Text>
+                                    <Input type='number' size="xs" variant="underlined" placeholder="Nif" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Nif: text } })} />
+                                    <Text style={styles.Label}>Endereço</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Endereço"onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Endereco: text } })} />
+                                    <Text style={styles.Label}>Codigo Postal</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Codigo Postal" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, CodigoPostal: text } })} />
+                                    <Text style={styles.Label}>Localidade</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Localidade" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Localidade: text } })} />
+                                </View>
+                                <View style={styles.slide2}>
+                                    <Text style={styles.Label}>Cidade</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Cidade" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Cidade: text } })} />
+                                    <Text style={styles.Label}>Pais</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Pais" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Pais: text } })} />
+                                    <Text style={styles.Label}>Região</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Região" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Regiao: text } })} />
+                                    <Text style={styles.Label}>Email</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Email" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Email: text } })} />
+                                    <Text style={styles.Label}>Telefone</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Telefone" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Telefone: text } })} />
+                                    <Text style={styles.Label}>Telemovel</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Telemovel" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Telemovel: text } })} />
+                                </View>
+                                <View style={styles.slide3}>
+                                    <Text style={styles.Label}>Fax</Text>
+                                    <Input size="xs" variant="underlined" value='' placeholder="Fax" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Fax: text } })} />
+                                    <Text style={styles.Label}>Website</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Website" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Website: text } })} />
+                                    <Text style={styles.Label}>Vencimento</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Vencimento" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Vencimento: text } })} />
+                                    <Text style={styles.Label}>Desconto</Text>
+                                    <Input size="xs" variant="underlined" placeholder="Desconto" onChangeText={(text) => this.setState({ newCliente: { ...this.state.newCliente, Desconto: text } })} />
+                                </View>
+                            </Swiper>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button.Group space={2}>
+                                <Button variant="ghost" colorScheme="blueGray" onPress={() => {
+                                    this.setState({ showModalAdd: false })
+                                }}>
+                                    Cancel
+                                </Button>
+                                <Button bg={'#CCAC6E'} onPress={() => {
+                                    this.submitAddCliente();
+                                }}>
+                                    Save
+                                </Button>
+                            </Button.Group>
+                        </Modal.Footer>
+                        </Modal.Content>
+                    </Modal>
             </Box> 
                     <FloatingAction
                         color='#AF7633'      
                         actions={actions}
                         onPressItem={name => {
-                        console.log(`selected button: ${name}`);
+                        if(name == 'bt_add'){
+                             this.setState({ showModalAdd: true })
+                        }
                         }}
                     />
                     </View>
