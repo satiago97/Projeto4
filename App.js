@@ -16,6 +16,8 @@ import Compras from './screens/Compras';
 import Analise from './screens/Analise';
 import Clientes from './screens/Clientes';
 import Artigos from './screens/Artigos';
+import ComprasDetails from './screens/ComprasDetails';
+import Faturas from './screens/Faturas';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -79,6 +81,18 @@ export default function App() {
             title="Articles"
             name="Artigos"
             component={Artigos}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="ComprasDetails"
+            name="ComprasDetails"
+            component={ComprasDetails}
+            options={{ headerShown: false }}
+          />
+            <Stack.Screen
+            title="Faturas"
+            name="Faturas"
+            component={Faturas}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

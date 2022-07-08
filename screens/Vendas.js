@@ -17,14 +17,14 @@ export default class Vendas extends Component {
         super(props);
         this.state = {
             data: [
-                { id: 1, title: 'Faturas', image: 'https://img.icons8.com/color/96/000000/invoice.png' },
-                { id: 2, title: 'Faturas Simplificadas', image: 'https://img.icons8.com/color/96/000000/check--v1.png' },
-                { id: 3, title: 'Faturas-Recibo', image: 'https://img.icons8.com/color/96/000000/receipt.png' },
-                { id: 4, title: 'Notas de Crédito', image: 'https://img.icons8.com/color/96/000000/insert-card.png' },
-                { id: 5, title: 'Notas de Débito', image: 'https://img.icons8.com/color/96/000000/bill.png' },
-                { id: 6, title: 'Recibos', image: 'https://img.icons8.com/color/96/000000/get-a-receipt.png' },
-                { id: 7, title: 'Avenças', image: 'https://img.icons8.com/color/96/000000/paper.png' },
-                { id: 8, title: 'Mov. Adicionais', image: 'https://img.icons8.com/color/96/000000/move-stock.png' },
+                { id: 1, title: 'Faturas', image: 'https://img.icons8.com/color/96/000000/invoice.png', route: 'Faturas'},
+                { id: 2, title: 'Faturas Simplificadas', image: 'https://img.icons8.com/color/96/000000/check--v1.png', route: ''},
+                { id: 3, title: 'Faturas-Recibo', image: 'https://img.icons8.com/color/96/000000/receipt.png', route: ''},
+                { id: 4, title: 'Notas de Crédito', image: 'https://img.icons8.com/color/96/000000/insert-card.png', route: ''},
+                { id: 5, title: 'Notas de Débito', image: 'https://img.icons8.com/color/96/000000/bill.png', route: ''},
+                { id: 6, title: 'Recibos', image: 'https://img.icons8.com/color/96/000000/get-a-receipt.png', route: ''},
+                { id: 7, title: 'Avenças', image: 'https://img.icons8.com/color/96/000000/paper.png', route: ''},
+                { id: 8, title: 'Mov. Adicionais', image: 'https://img.icons8.com/color/96/000000/move-stock.png', route: ''},
             ],
         };
     }
@@ -47,7 +47,7 @@ export default class Vendas extends Component {
                     renderItem={({ item }) => {
                         return (
                             <View>
-                                <TouchableOpacity style={styles.card} onPress={() => { this.clickEventListener(item) }}>
+                                <TouchableOpacity style={styles.card} onPress={() => { this.props.navigation.navigate(item.route)  }}>
                                     <Image style={styles.cardImage} source={{ uri: item.image }} />
                                 </TouchableOpacity>
 

@@ -5,7 +5,7 @@ import qs from 'qs';
 
 
 class ComprasService {
-    getToken = async () => AsyncStorage.getItem('TOKEn')
+    getToken = async () => AsyncStorage.getItem('TOKEN')
 
     async getCompras() {
         var token = await this.getToken();
@@ -18,6 +18,7 @@ class ComprasService {
                 _token: token,
                 pag: '0',
                 numRows: '25',
+                table_usage: '1'
             },
             headers: {
                 Accept: 'application/json',
@@ -27,7 +28,7 @@ class ComprasService {
 
     async getComprasDetails(id) {
         var token = await this.getToken();
-
+        console.log(id);
         return axios({
             url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/compras/compras',
             method: 'GET',
@@ -44,8 +45,36 @@ class ComprasService {
     }
 
 
-    //falta o add compra mas quero fazer o ws quando chegar a essa parte
-    //falta o edit compra tb
+    async finalizarCompra(id) {
+        var token = await this.getToken();
+        return axios({
+            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/compras/compras',
+            method: 'PATCH',
+            timeout: 5000,
+            data : qs.stringify({
+                opcao: '6',
+                _token: token,
+                idCompra: id,
+        }),
+                headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        });
+    }
+
+    async anularCompra(id) {
+        var token = await this.getToken();
+        return axios({
+            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/compras/compras',
+            method: 'PATCH',
+            timeout: 5000,
+            data : qs.stringify({
+                opcao: '5',
+                _token: token,
+                idCompra: id,
+        }),
+                headers: { 'content-type': 'application/x-www-form-urlencoded' },
+        });
+    }
+
 
     async deleteCompra(id) {
         var token = await this.getToken();
