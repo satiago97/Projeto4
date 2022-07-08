@@ -5,6 +5,7 @@ import qs from 'qs';
 
 class FaturasService {
     getToken = async () => AsyncStorage.getItem('TOKEN')
+
     async addFatura(dadosFatura) {
         var token = await this.getToken();
 

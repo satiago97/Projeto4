@@ -43,6 +43,24 @@ class OrcamentosService {
         });
     }
 
+    async finalizarOrcamento(id) {
+        var token = await this.getToken();
+
+        return axios({
+            url: 'https://demo.gesfaturacao.pt/gesfaturacao/server/webservices/api/orcamentos/orcamentos',
+            method: 'PATCH',
+            timeout: 5000,
+            params: {
+                opcao: '6',
+                idOrcamento: id,
+                _token: token,
+            },
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded',
+            }
+        })
+    }
+
     //falta o add orcamento mas quero ver quando fizer a parte dos orcamentos
 
     async deleteOrcamento(id) {
@@ -58,7 +76,7 @@ class OrcamentosService {
                 idOrcamento: id,
             }),
             headers: {
-                'content-type': 'application/x-www-form-urlencoded'
+                'content-type': 'application/x-www-form-urlencoded',
             },
         });
     }

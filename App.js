@@ -16,6 +16,12 @@ import Compras from './screens/Compras';
 import Analise from './screens/Analise';
 import Clientes from './screens/Clientes';
 import Artigos from './screens/Artigos';
+import Bancos from './screens/Bancos';
+import AddBanco from './screens/AddBanco';
+import Fornecedores from './screens/Fornecedores';
+import CategoriasArtigos from './screens/CategoriasArtigos';
+import OrcamentosDetails from './screens/OrcamentosDetails';
+
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -79,6 +85,35 @@ export default function App() {
             title="Articles"
             name="Artigos"
             component={Artigos}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="Banks"
+            name="Bancos"
+            component={Bancos}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="AddBanks"
+            name="Adicionar Banco"
+            component={AddBanco}
+          />
+          <Stack.Screen
+            title="Providers"
+            name="Fornecedores"
+            component={Fornecedores}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="Categories"
+            name="Categorias"
+            component={CategoriasArtigos}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            title="OrcamentosDetalhes"
+            name="OrcamentosDetalhes"
+            component={OrcamentosDetails}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
